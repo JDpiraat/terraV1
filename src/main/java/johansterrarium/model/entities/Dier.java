@@ -21,7 +21,7 @@ public abstract class Dier extends Organisme implements Beweegbaar {
 			return null;
 		}
 		Collections.shuffle(richtingen);
-		return richtingen.get(0);
+		return richtingen.get(richtingen.size() - 1);
 	}	
 
 }

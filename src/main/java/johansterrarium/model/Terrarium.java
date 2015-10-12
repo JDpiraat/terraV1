@@ -30,20 +30,25 @@ public enum Terrarium {
 	public void initialiseer() {
 		List<Coordinaat> vrijeplaatsen = getAlleVrijePlaatsen();
 		Collections.shuffle(vrijeplaatsen);
+		// veel werk want elke keer indexen aanpassen van de hele list
 		for (int i = 0; i < START_AANTAL_PLANTEN; i++) {
 			terrarium[vrijeplaatsen.get(0).getX()][vrijeplaatsen.remove(0)
 					.getY()] = new Plant(1);
 		}
+		// dus beter:
 		for (int i = 0; i < START_AANTAL_HERBIVOREN; i++) {
-			terrarium[vrijeplaatsen.get(0).getX()][vrijeplaatsen.remove(0)
+			int laatste = vrijeplaatsen.size() - 1;
+			terrarium[vrijeplaatsen.get(laatste).getX()][vrijeplaatsen.remove(laatste)
 					.getY()] = new Herbivoor(1);
 		}
 		for (int i = 0; i < START_AANTAL_CARNIVOREN; i++) {
-			terrarium[vrijeplaatsen.get(0).getX()][vrijeplaatsen.remove(0)
+			int laatste = vrijeplaatsen.size() - 1;
+			terrarium[vrijeplaatsen.get(laatste).getX()][vrijeplaatsen.remove(laatste)
 					.getY()] = new Carnivoor(0);
 		}
 		for (int i = 0; i < START_AANTAL_OMNIVOREN; i++) {
-			terrarium[vrijeplaatsen.get(0).getX()][vrijeplaatsen.remove(0)
+			int laatste = vrijeplaatsen.size() - 1;
+			terrarium[vrijeplaatsen.get(laatste).getX()][vrijeplaatsen.remove(laatste)
 					.getY()] = new Omnivoor(1);
 		}
 	}
