@@ -20,11 +20,11 @@ public class Omnivoor extends Dier implements Actief {
 			Terrarium.INSTANCE.verwijderOrganisme(organisme);
 			this.setActieOndernomen(true);
 		}
-		if (organisme instanceof Omnivoor) {
-			Terrarium.INSTANCE.voegNieuwOrganismeToe(new Omnivoor(0));
-			this.setActieOndernomen(true);
-		}
-		if (organisme instanceof Carnivoor ) { // || organisme instanceof Omnivoor
+//		if (organisme instanceof Omnivoor) {
+//			Terrarium.INSTANCE.voegNieuwOrganismeToe(new Omnivoor(0));
+//			this.setActieOndernomen(true);
+//		}
+		if (organisme instanceof Carnivoor || organisme instanceof Omnivoor) { // || organisme instanceof Omnivoor
 			if (this.getLevenskracht() > organisme.getLevenskracht()) {
 				this.addLevenskracht(organisme.getLevenskracht());
 				Terrarium.INSTANCE.verwijderOrganisme(organisme);
