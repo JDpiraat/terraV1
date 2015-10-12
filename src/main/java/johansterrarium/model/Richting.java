@@ -1,4 +1,4 @@
-package johansterrarium.model.entities;
+package johansterrarium.model;
 
 public enum Richting {
 	NOORD,

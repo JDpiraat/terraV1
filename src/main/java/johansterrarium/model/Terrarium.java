@@ -12,7 +12,6 @@ import johansterrarium.model.entities.Herbivoor;
 import johansterrarium.model.entities.Omnivoor;
 import johansterrarium.model.entities.Organisme;
 import johansterrarium.model.entities.Plant;
-import johansterrarium.model.entities.Richting;
 
 public enum Terrarium {
 

@@ -3,6 +3,8 @@ package johansterrarium.model.entities;
 import java.util.Collections;
 import java.util.List;
 
+import johansterrarium.model.Richting;
+
 public abstract class Dier extends Organisme implements Beweegbaar {
 	
 	private boolean actieOndernomen = false;
