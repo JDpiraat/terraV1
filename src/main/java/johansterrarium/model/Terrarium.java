@@ -17,35 +17,48 @@ public enum Terrarium {
 
 	INSTANCE;
 
-	private static final int GROOTTE_TERRARIUM = 10;
-	private Organisme[][] terrarium = new Organisme[GROOTTE_TERRARIUM][GROOTTE_TERRARIUM];
-	private static final int START_AANTAL_PLANTEN = 6;
-	private static final int START_AANTAL_HERBIVOREN = 12;
-	private static final int START_AANTAL_CARNIVOREN = 10;
+//	private static final int GROOTTE_TERRARIUM = 10;
+	private Organisme[][] terrarium; // = new Organisme[GROOTTE_TERRARIUM][GROOTTE_TERRARIUM];
+//	private static final int START_AANTAL_PLANTEN = 6;
+//	private static final int START_AANTAL_HERBIVOREN = 12;
+//	private static final int START_AANTAL_CARNIVOREN = 10;
 //	private final static int AANTAL_PLANTEN_PER_DAG = 2;
 	
-	private static final int START_AANTAL_OMNIVOREN = 6;
+//	private static final int START_AANTAL_OMNIVOREN = 6;
 
-	public void initialiseer() {
+	public void initialiseer(int grootteTerrarium, int startAantalPlanten, int startAantalHerbivoren, int startAantalCarnivoren) {
+		terrarium = new Organisme[grootteTerrarium][grootteTerrarium];
 		List<Coordinaat> vrijeplaatsen = getAlleVrijePlaatsen();
 		Collections.shuffle(vrijeplaatsen);
 		// veel werk want elke keer indexen aanpassen van de hele list
-		for (int i = 0; i < START_AANTAL_PLANTEN; i++) {
+		for (int i = 0; i < startAantalPlanten; i++) {
 			terrarium[vrijeplaatsen.get(0).getX()][vrijeplaatsen.remove(0)
 					.getY()] = new Plant(1);
 		}
 		// dus beter:
-		for (int i = 0; i < START_AANTAL_HERBIVOREN; i++) {
+		for (int i = 0; i < startAantalHerbivoren; i++) {
 			int laatste = vrijeplaatsen.size() - 1;
 			terrarium[vrijeplaatsen.get(laatste).getX()][vrijeplaatsen.remove(laatste)
 					.getY()] = new Herbivoor(1);
 		}
-		for (int i = 0; i < START_AANTAL_CARNIVOREN; i++) {
+		for (int i = 0; i < startAantalCarnivoren; i++) {
 			int laatste = vrijeplaatsen.size() - 1;
 			terrarium[vrijeplaatsen.get(laatste).getX()][vrijeplaatsen.remove(laatste)
 					.getY()] = new Carnivoor(0);
 		}
-		for (int i = 0; i < START_AANTAL_OMNIVOREN; i++) {
+//		for (int i = 0; i < START_AANTAL_OMNIVOREN; i++) {
+//			int laatste = vrijeplaatsen.size() - 1;
+//			terrarium[vrijeplaatsen.get(laatste).getX()][vrijeplaatsen.remove(laatste)
+//					.getY()] = new Omnivoor(1);
+//		}
+	}
+	
+	public void initialiseer(int grootteTerrarium, int startAantalPlanten, int startAantalHerbivoren, 
+			int startAantalCarnivoren, int startAantalOmnivoren){
+		this.initialiseer(grootteTerrarium, startAantalPlanten, startAantalHerbivoren, startAantalCarnivoren);
+		List<Coordinaat> vrijeplaatsen = getAlleVrijePlaatsen();
+		Collections.shuffle(vrijeplaatsen);
+		for (int i = 0; i < startAantalOmnivoren; i++) {
 			int laatste = vrijeplaatsen.size() - 1;
 			terrarium[vrijeplaatsen.get(laatste).getX()][vrijeplaatsen.remove(laatste)
 					.getY()] = new Omnivoor(1);
@@ -86,8 +99,7 @@ public enum Terrarium {
 				terrarium[vrijeplaatsen.get(0).getX()][vrijeplaatsen.remove(0)
 						.getY()] = new Plant(1);
 				if (vrijeplaatsen.isEmpty()){
-					// om een arrayindexoutofbounce te vermijden als er geen plaats meer is ...
-					// kan hoogstwaarschijnlijk beter
+					// om een arrayindexoutofbounce te vermijden als er geen plaats meer is ...					
 					break;
 				}
 			}
@@ -153,8 +165,8 @@ public enum Terrarium {
 
 	private List<Coordinaat> getAlleVrijePlaatsen() {
 		List<Coordinaat> vrijeplaatsen = new ArrayList<>();
-		for (int x = 0; x < GROOTTE_TERRARIUM; x++) {
-			for (int y = 0; y < GROOTTE_TERRARIUM; y++) {
+		for (int x = 0; x < terrarium.length; x++) {
+			for (int y = 0; y < terrarium.length; y++) {
 				if (terrarium[x][y] == null)
 					vrijeplaatsen.add(new Coordinaat(x, y));
 			}
@@ -173,13 +185,13 @@ public enum Terrarium {
 			// and we ignore the exception
 		}
 		// do it like this : check it yourself instead of counting on an exception being thrown
-		if (x + 1 < GROOTTE_TERRARIUM && terrarium[x + 1][y] == null) {
+		if (x + 1 < terrarium.length && terrarium[x + 1][y] == null) {
 			richtingen.add(Richting.ZUID);
 		}
 		if (y - 1 >= 0 && terrarium[x][y - 1] == null) {
 			richtingen.add(Richting.WEST);
 		}
-		if (y + 1 < GROOTTE_TERRARIUM && terrarium[x][y + 1] == null) {
+		if (y + 1 < terrarium.length && terrarium[x][y + 1] == null) {
 			richtingen.add(Richting.OOST);
 		}
 		return richtingen;
