@@ -146,7 +146,6 @@ public enum Terrarium {
 				}
 			}
 		}
-
 	}
 
 	public Organisme[][] getSituatie() {
