@@ -15,7 +15,8 @@ public class SpelController {
 	private static final int START_AANTAL_OMNIVOREN = 6;
 	
 	public SpelController() {
-		Terrarium.INSTANCE.initialiseer(GROOTTE_TERRARIUM, START_AANTAL_PLANTEN, START_AANTAL_HERBIVOREN, START_AANTAL_CARNIVOREN);
+		Terrarium.INSTANCE.initialiseer(GROOTTE_TERRARIUM, START_AANTAL_PLANTEN, 
+				START_AANTAL_HERBIVOREN, START_AANTAL_CARNIVOREN, START_AANTAL_OMNIVOREN);
 	}
 	
 	public Organisme[][] getTerrarium(){
