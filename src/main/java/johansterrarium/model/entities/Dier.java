@@ -5,14 +5,18 @@ import java.util.List;
 
 import johansterrarium.model.Richting;
 
-public abstract class Dier extends Organisme implements Beweegbaar {
+// interface Actief pas later toegevoegd
+public abstract class Dier extends Organisme implements Beweegbaar, Actief {
 	
 	private boolean actieOndernomen = false;
 
+	// ...ActieOndernomen later in interface actief gezet
+	@Override
 	public boolean isActieOndernomen() {
 		return actieOndernomen;
 	}
 
+	@Override
 	public void setActieOndernomen(boolean actieOndernomen) {
 		this.actieOndernomen = actieOndernomen;
 	}

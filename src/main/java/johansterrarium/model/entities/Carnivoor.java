@@ -2,7 +2,8 @@ package johansterrarium.model.entities;
 
 import johansterrarium.model.Terrarium;
 
-public class Carnivoor extends Dier implements Actief {
+//interface Actief pas later hier verwijderd (zie Dier)
+public class Carnivoor extends Dier {
 
 	public Carnivoor(int levenskracht) {
 		setLevenskracht(levenskracht);

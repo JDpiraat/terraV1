@@ -87,6 +87,7 @@ public enum Terrarium {
 		if (vrijeplaatsen != null && !vrijeplaatsen.isEmpty()) {
 			Collections.shuffle(vrijeplaatsen);
 			Coordinaat coordinat = vrijeplaatsen.get(0);
+			// inner classje gebruiken ... zonder de setters te gebruiken
 			terrarium[coordinat.x][coordinat.y] = organisme;
 		}
 	}
@@ -99,7 +100,7 @@ public enum Terrarium {
 				terrarium[vrijeplaatsen.get(0).getX()][vrijeplaatsen.remove(0)
 						.getY()] = new Plant(1);
 				if (vrijeplaatsen.isEmpty()){
-					// om een arrayindexoutofbounce te vermijden als er geen plaats meer is ...					
+					// om een arrayindexoutofbounce te vermijden als er geen plaats meer is ...	idd ne break ... ;-(				
 					break;
 				}
 			}
@@ -131,8 +132,12 @@ public enum Terrarium {
 			for (int j = 0; j < terrarium.length; j++) {
 				if (terrarium[i][j] instanceof Beweegbaar) {
 					Beweegbaar beweegbaar = (Beweegbaar) terrarium[i][j];
-					if (!((Dier) beweegbaar).isActieOndernomen()) {
-						((Dier) beweegbaar).setActieOndernomen(true);
+					// Actief was hier Dier ; met al deze wijzigingen valt er over te denken om gewoon
+					// Dier te gebruiken : niet meer casten naar Actief en ook niet naar Organisme 
+					// (down casten moet, up casten niet nodig)
+					// het wordt wel minder flexibel
+					if (!((Actief) beweegbaar).isActieOndernomen()) {
+						((Actief) beweegbaar).setActieOndernomen(true);
 						Richting richting = beweegbaar
 								.doeStap(getBeschikbarerichtingen(i, j));
 						if (richting != null) {

@@ -29,6 +29,5 @@ public class SpelController {
 		Terrarium.INSTANCE.acties();
 		Terrarium.INSTANCE.beweeg();
 		Terrarium.INSTANCE.resetActieOndernomen();
-	}
-	
+	}	
 }
